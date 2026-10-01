@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResQ Emergency Response</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}:root{--bg:#f5f7fa;--card:#fff;--text:#101828;--muted:#667085;--border:#e4e7ec;--red:#e63946;--red-dark:#c91f2c;--blue:#2563eb;--green:#12b76a;--radius:18px}body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text)}button,input,textarea{font-family:inherit}button{cursor:pointer}.app{min-height:100vh;display:flex}.sidebar{width:255px;background:#0b1220;color:#fff;padding:25px 16px;display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0}.brand{display:flex;align-items:center;gap:12px}.brand-icon{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:var(--red);font-size:22px}.brand strong{display:block;font-size:19px}.brand span{color:#98a2b3;font-size:11px}nav{margin-top:45px}.nav-item{width:100%;padding:13px 14px;margin-bottom:8px;border:0;border-radius:12px;background:transparent;color:#98a2b3;text-align:left;font-size:14px}.nav-item:hover,.nav-item.active{background:#ffffff14;color:#fff}.nav-item.active{border-left:3px solid var(--red)}.sidebar-bottom{margin-top:auto}.system-status{padding:12px;border-radius:12px;background:#ffffff0d;color:#98a2b3;font-size:12px}.status-dot{width:8px;height:8px;background:var(--green);display:inline-block;border-radius:50%;margin-right:7px}.main{margin-left:255px;width:calc(100% - 255px);padding:35px}.mobile-header{display:none}.page{display:none}.active-page{display:block}.topbar{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px}.eyebrow{color:var(--red);font-size:11px;font-weight:800;letter-spacing:1.5px;margin-bottom:8px}h1{font-size:32px;letter-spacing:-1px}.subtitle{color:var(--muted);margin-top:7px;font-size:14px}.hero{min-height:300px;border-radius:25px;padding:45px;color:#fff;background:radial-gradient(circle at 80% 30%,#ffffff26,transparent 30%),linear-gradient(120deg,#991b1b,#e63946);display:flex;align-items:center;justify-content:space-between;overflow:hidden}.hero-badge{font-size:12px;margin-bottom:15px;padding:7px 12px;display:inline-block;background:#ffffff26;border-radius:20px}.hero h2{max-width:650px;font-size:42px;line-height:1.08;letter-spacing:-2px}.hero h2 span{color:#ffd6d9}.hero p{max-width:550px;margin:15px 0 25px;color:#ffe7e9;line-height:1.6}.emergency-btn{border:0;padding:15px 24px;border-radius:12px;background:#fff;color:var(--red-dark);font-weight:800;box-shadow:0 10px 30px #0003}.hero-symbol{width:180px;height:180px;position:relative;display:grid;place-items:center}.hero-circle{width:100px;height:100px;border-radius:50%;background:#ffffff26;border:2px solid #ffffff80;display:grid;place-items:center;font-size:55px;font-weight:800}.pulse-ring{position:absolute;width:160px;height:160px;border:2px solid #ffffff4d;border-radius:50%;animation:pulse 2s infinite}@keyframes pulse{0%{transform:scale(.8);opacity:.8}100%{transform:scale(1.2);opacity:0}}.section-heading{margin:30px 0 15px}.section-heading h2{font-size:20px}.section-heading p{color:var(--muted);font-size:13px;margin-top:5px}.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.quick-card{background:#fff;border:1px solid var(--border);padding:20px;border-radius:var(--radius);text-align:left;transition:.2s}.quick-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px #10182812}.quick-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;margin-bottom:15px;font-size:20px}.quick-icon.red{background:#fee4e2}.quick-icon.blue{background:#e0ecff}.quick-icon.green{background:#dff8eb}.quick-card h3{font-size:15px}.quick-card p{color:var(--muted);font-size:12px;margin-top:7px;line-height:1.5}.map-card{margin-top:20px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}.map-header{padding:18px 20px;display:flex;justify-content:space-between;align-items:center}.map-header h2,.map-header h3{font-size:16px}.map-header p{color:var(--muted);font-size:12px;margin-top:4px}.map{width:100%;height:400px}.outline-btn{border:1px solid var(--border);background:#fff;padding:9px 14px;border-radius:9px;font-size:12px;font-weight:600}.report-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.7fr);gap:20px}.form-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px}.form-title{display:flex;gap:13px;align-items:center;margin-bottom:20px}.step-number{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:#fff0f1;color:var(--red);font-size:11px;font-weight:800}.form-title h2{font-size:17px}.form-title p{color:var(--muted);font-size:12px;margin-top:3px}label{display:block;font-size:13px;font-weight:700;margin-bottom:10px}.incident-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:30px}.incident-option{padding:15px 10px;background:#fafafa;border:1px solid var(--border);border-radius:12px;transition:.2s}.incident-option span{display:block;font-size:24px;margin-bottom:7px}.incident-option small{display:block;margin-top:7px;font-weight:600}.incident-option:hover,.incident-option.selected{border-color:var(--red);background:#fff5f5;color:var(--red-dark)}.location-title{margin-top:10px}.location-actions{display:flex;gap:10px;margin-bottom:12px}.location-btn{border:0;padding:11px 14px;border-radius:9px;background:#101828;color:#fff;font-size:12px;font-weight:600}.location-btn.secondary{background:#f2f4f7;color:#344054}.location-status{padding:10px;background:#f9fafb;border:1px solid var(--border);border-radius:9px;color:var(--muted);font-size:12px;margin-bottom:10px}.report-map{height:330px;margin-bottom:30px;border-radius:12px}.upload-box{border:2px dashed #d0d5dd;border-radius:14px;min-height:170px;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;position:relative;overflow:hidden;margin-bottom:25px}.upload-box input{position:absolute;width:100%;height:100%;opacity:0;cursor:pointer}.upload-icon{font-size:32px;margin-bottom:8px}.upload-box strong,.upload-box span{display:block}.upload-box span{color:var(--muted);font-size:11px;margin-top:5px}#photoPreview{display:none;max-width:100%;max-height:250px}textarea{width:100%;border:1px solid var(--border);border-radius:10px;padding:13px;resize:vertical;outline:0;font-size:13px;margin-bottom:20px}textarea:focus{border-color:var(--blue)}.submit-btn{width:100%;padding:15px;border:0;border-radius:11px;background:var(--red);color:#fff;font-weight:800}.safety-card{background:#101828;color:#fff;border-radius:var(--radius);padding:25px;margin-bottom:20px}.safety-icon{font-size:30px;margin-bottom:15px}.safety-card h2{font-size:18px}.safety-card p{color:#98a2b3;line-height:1.6;font-size:12px;margin-top:10px}.small-map-card{margin-top:0}.mini-map{height:260px}.filter-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:5px}.filter{white-space:nowrap;border:1px solid var(--border);background:#fff;padding:9px 13px;border-radius:20px;font-size:12px}.filter.active{background:#101828;color:#fff;border-color:#101828}.nearby-layout{display:grid;grid-template-columns:1.5fr .8fr;gap:20px;margin-top:20px}.nearby-map-card{margin:0}.incident-panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}.panel-header{padding:20px;border-bottom:1px solid var(--border)}.panel-header h2{font-size:16px}.panel-header p{color:var(--muted);font-size:11px;margin-top:4px}#incidentList{max-height:480px;overflow-y:auto}.incident-card{padding:17px;border-bottom:1px solid var(--border);cursor:pointer}.incident-card:hover{background:#f9fafb}.incident-top{display:flex;justify-content:space-between;align-items:center}.incident-type{font-weight:800;font-size:13px}.incident-time{color:var(--muted);font-size:10px}.incident-description{color:var(--muted);font-size:12px;line-height:1.5;margin-top:8px}.empty-state{text-align:center;padding:60px 25px;color:var(--muted)}.empty-state>div{font-size:40px;margin-bottom:10px}.empty-state h3{color:var(--text);font-size:15px;margin-bottom:6px}.empty-state p{font-size:11px;line-height:1.5}.modal{position:fixed;inset:0;background:#0008;display:none;place-items:center;z-index:100}.modal.show{display:grid}.modal-box{width:min(400px,calc(100% - 30px));background:#fff;padding:35px;border-radius:20px;text-align:center}.success-icon{width:60px;height:60px;display:grid;place-items:center;border-radius:50%;background:#dcfae6;color:var(--green);font-size:30px;margin:0 auto 15px}.modal-box p{color:var(--muted);font-size:13px;margin:10px 0 20px}@media(max-width:1000px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px);padding:25px}.hero h2{font-size:34px}.nearby-layout,.report-layout{grid-template-columns:1fr}.report-info{display:grid;grid-template-columns:1fr 1fr;gap:15px}.safety-card{margin:0}}@media(max-width:700px){.sidebar{display:none}.main{margin-left:0;width:100%;padding:18px}.mobile-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.topbar{display:block}h1{font-size:26px}.hero{padding:30px 25px;min-height:380px}.hero h2{font-size:32px}.hero-symbol{display:none}.quick-grid{grid-template-columns:1fr}.incident-grid{grid-template-columns:repeat(2,1fr)}.location-actions{flex-direction:column}.report-info{grid-template-columns:1fr}.map{height:320px}.nearby-layout{display:block}.incident-panel{margin-top:15px}.form-card{padding:20px}}
+
+/* ===== ResQ add-on: Profile + SOS (does not modify style.css) ===== */
+:root{--sos:#d92d20}
+
+/* Sidebar profile card */
+.side-profile{display:flex;align-items:center;gap:10px;margin:18px 0 0;padding:10px;border-radius:12px;background:#ffffff0d;border:0;color:#fff;width:100%;text-align:left}
+.side-profile:hover{background:#ffffff14}
+.avatar{width:38px;height:38px;border-radius:50%;background:#344054 center/cover no-repeat;display:grid;place-items:center;font-weight:700;font-size:15px;color:#fff;flex:none;overflow:hidden}
+.side-profile div{min-width:0}
+.side-profile strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-profile span{font-size:11px;color:#98a2b3}
+.nav-sos{color:#fda29b}
+.nav-sos:hover{background:#d92d2033;color:#fff}
+.mobile-avatar{width:38px;height:38px;border-radius:50%;border:0;background:#344054 center/cover no-repeat;color:#fff;font-weight:700}
+
+/* Profile page */
+.profile-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.7fr);gap:20px}
+.photo-row{display:flex;align-items:center;gap:18px;margin-bottom:26px}
+.profile-photo{width:92px;height:92px;border-radius:50%;background:#f2f4f7 center/cover no-repeat;display:grid;place-items:center;font-size:34px;color:#98a2b3;border:1px solid var(--border);flex:none}
+.photo-actions{display:flex;gap:8px;flex-wrap:wrap}
+.photo-actions input{display:none}
+.field{margin-bottom:18px}
+.field input{width:100%;border:1px solid var(--border);border-radius:10px;padding:12px 13px;font-size:13px;outline:0;background:#fff}
+.field input:focus{border-color:var(--blue)}
+.field small{display:block;color:var(--muted);font-size:11px;margin-top:6px}
+.field.invalid input{border-color:var(--red)}
+.field .err{display:none;color:var(--red-dark);font-size:11px;margin-top:6px}
+.field.invalid .err{display:block}
+.form-card h3.section-label{font-size:15px;margin:8px 0 14px;padding-top:18px;border-top:1px solid var(--border)}
+.saved-note{display:none;margin-top:12px;padding:10px 12px;border-radius:9px;background:#dcfae6;color:#067647;font-size:12px;font-weight:600}
+.saved-note.show{display:block}
+.sos-info-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:20px}
+.sos-info-card h3{font-size:15px;margin-bottom:8px}
+.sos-info-card ol{margin-left:18px;color:var(--muted);font-size:12px;line-height:1.8}
+.sos-info-card .contact-summary{margin-top:14px;padding:12px;border-radius:10px;background:#fff5f5;border:1px solid #fecdca;font-size:12px}
+
+/* Floating SOS button */
+.sos-fab{position:fixed;right:26px;bottom:26px;z-index:90;width:78px;height:78px;border-radius:50%;border:0;background:var(--sos);color:#fff;font-weight:800;font-size:20px;letter-spacing:.5px;box-shadow:0 8px 24px #d92d2066}
+.sos-fab:hover{background:#b42318}
+.sos-fab:focus-visible,.sos-btn:focus-visible,.side-profile:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 6px var(--sos)}
+
+/* SOS modal */
+.sos-box{width:min(440px,calc(100% - 24px));background:#fff;border-radius:22px;padding:28px;text-align:center;max-height:calc(100vh - 24px);overflow-y:auto}
+.sos-box h2{font-size:22px;margin-bottom:6px}
+.sos-box p{color:var(--muted);font-size:13px;line-height:1.5}
+.sos-count{width:110px;height:110px;margin:18px auto;border-radius:50%;background:var(--sos);color:#fff;display:grid;place-items:center;font-size:52px;font-weight:800}
+.sos-row{display:flex;gap:10px;margin-top:16px}
+.sos-row>button{flex:1}
+.ghost-btn{padding:14px;border-radius:11px;border:1px solid var(--border);background:#fff;font-weight:700;font-size:14px}
+.sos-loc{margin:14px 0;padding:10px 12px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);font-size:12px;color:var(--muted);text-align:left}
+.sos-loc.ok{background:#ecfdf3;border-color:#abefc6;color:#067647}
+.sos-loc.warn{background:#fffaeb;border-color:#fedf89;color:#93370d}
+.sos-actions{display:grid;gap:10px;margin-top:6px}
+.sos-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border:0;border-radius:12px;font-weight:800;font-size:15px;color:#fff;text-decoration:none}
+.sos-btn.call{background:var(--sos)}
+.sos-btn.sms{background:#175cd3}
+.sos-btn.wa{background:#079455}
+.sos-btn.share{background:#101828}
+.sos-sent-msg{margin-top:12px;padding:10px;border-radius:9px;background:#f2f4f7;font-size:11px;color:#475467;text-align:left;white-space:pre-wrap;word-break:break-word}
+
+@media(max-width:1000px){.profile-layout{grid-template-columns:1fr}}
+@media(max-width:700px){
+  .sos-fab{right:16px;bottom:16px;width:68px;height:68px;font-size:18px}
+  .photo-row{flex-direction:column;align-items:flex-start}
+  .main{padding-bottom:110px}
+}
+@media(prefers-reduced-motion:reduce){.sos-fab{transition:none}}
+
+/* ===== ResQ add-on: report statuses + admin review (does not modify style.css) ===== */
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.s-reported{background:#fef7c3;color:#854a0e}
+.s-under_review{background:#d1e9ff;color:#175cd3}
+.s-verified{background:#d3f8df;color:#067647}
+.s-unverified{background:#f2f4f7;color:#475467}
+.s-resolved{background:#ccfbef;color:#0e7090}
+.s-rejected{background:#fee4e2;color:#b42318}
+.status-row{margin-top:8px}
+.incident-photo{display:block;max-width:100%;max-height:180px;border-radius:10px;margin-top:10px;border:1px solid var(--border)}
+
+.status-legend{margin-top:16px;padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+.status-legend .legend-items{display:flex;flex-wrap:wrap;gap:8px 14px}
+.status-legend .legend-items span.item{font-size:12px;color:var(--muted)}
+.status-legend p{font-size:12px;color:var(--muted);margin-top:10px}
+
+.mobile-admin{margin-left:auto;margin-right:8px;width:38px;height:38px;border-radius:50%;border:0;background:#e4e7ec;font-size:16px}
+
+.admin-wrap{max-width:420px}
+.admin-wrap .field{margin-bottom:16px}
+.admin-err{color:var(--red-dark);font-size:12px;min-height:18px;margin-bottom:10px}
+.admin-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap}
+.stat-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px}
+.stat-chip{border:1px solid var(--border);background:#fff;border-radius:12px;padding:10px 14px;min-width:92px;text-align:left}
+.stat-chip strong{display:block;font-size:20px}
+.stat-chip span{font-size:11px;color:var(--muted);white-space:nowrap}
+.stat-chip.active{border-color:#101828;background:#101828}
+.stat-chip.active strong,.stat-chip.active span{color:#fff}
+.admin-list{display:grid;gap:14px}
+.admin-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.admin-card-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.admin-card-top .muted{margin-left:auto}
+.muted{color:var(--muted);font-size:11px}
+.admin-desc{margin:10px 0;font-size:13px;line-height:1.55}
+.admin-meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0;font-size:12px;color:var(--muted)}
+.admin-meta a{color:var(--blue);font-weight:600}
+.admin-note{width:100%;border:1px solid var(--border);border-radius:9px;padding:10px 12px;font-size:12px;outline:0}
+.admin-note:focus{border-color:var(--blue)}
+.admin-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.adm-act{border:0;border-radius:9px;padding:9px 13px;font-size:12px;font-weight:700;color:#fff}
+.adm-act.blue{background:#175cd3}.adm-act.green{background:#079455}.adm-act.grey{background:#667085}.adm-act.teal{background:#0e9384}.adm-act.red{background:#d92d20}
+.adm-act:disabled{opacity:.5}
+@media(max-width:700px){.admin-card-top .muted{margin-left:0;width:100%}}
+
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-icon">✦</div><div><strong>ResQ</strong><span>Emergency Network</span></div></div>
+  <nav>
+    <button class="nav-item active" data-page="dashboard">⌂ &nbsp; Dashboard</button>
+    <button class="nav-item" data-page="report">🚨 &nbsp; Report Emergency</button>
+    <button class="nav-item" data-page="nearby">◉ &nbsp; Nearby Incidents</button>
+    <button class="nav-item" data-page="profile">👤 &nbsp; My Profile</button>
+    <button class="nav-item nav-sos" type="button" onclick="openSOS()">🆘 &nbsp; SOS</button>
+    <button class="nav-item" data-page="admin">🛡️ &nbsp; Admin Review</button>
+  </nav>
+  <div class="sidebar-bottom"><button class="side-profile" type="button" onclick="showPage('profile')" aria-label="Open my profile"><div class="avatar" id="sideAvatar">?</div><div><strong id="sideName">Set up profile</strong><span id="sideSub">Add SOS contact</span></div></button><div class="system-status" style="margin-top:10px"><span class="status-dot"></span> System Online</div></div>
+</aside>
+
+<main class="main">
+<header class="mobile-header"><div class="brand"><div class="brand-icon">✦</div><strong>ResQ</strong></div><button class="mobile-admin" type="button" onclick="showPage('admin')" aria-label="Admin review">🛡️</button><button class="mobile-avatar" id="mobileAvatar" type="button" onclick="showPage('profile')" aria-label="Open my profile">?</button></header>
+
+<section id="dashboard" class="page active-page">
+  <div class="topbar"><div><p class="eyebrow">EMERGENCY RESPONSE</p><h1>Stay alert. Stay safe.</h1><p class="subtitle">Report emergencies and view verified reports around you.</p></div></div>
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">● Emergency reporting</div>
+      <h2>See something dangerous? <span>Report it.</span></h2>
+      <p>Send an emergency report with the incident type, location, photo and description.</p>
+      <button class="emergency-btn" onclick="showPage('report')">🚨 REPORT EMERGENCY</button>
+    </div>
+    <div class="hero-symbol"><div class="pulse-ring"></div><div class="hero-circle">!</div></div>
+  </div>
+  <div class="section-heading"><h2>Quick actions</h2><p>Get help or report an incident quickly.</p></div>
+  <div class="quick-grid">
+    <button class="quick-card" onclick="showPage('report')"><div class="quick-icon red">🚨</div><h3>Report Emergency</h3><p>Report a flood, fire, accident or other emergency.</p></button>
+    <button class="quick-card" onclick="showPage('nearby')"><div class="quick-icon blue">📍</div><h3>Nearby Incidents</h3><p>View reports submitted by users around you.</p></button>
+    <button class="quick-card" onclick="getCurrentLocation()"><div class="quick-icon green">◎</div><h3>Find My Location</h3><p>Detect your current device location.</p></button>
+  </div>
+  <div class="map-card"><div class="map-header"><div><h2>Live Map</h2><p>Your location and real incident reports.</p></div><button class="outline-btn" onclick="getCurrentLocation()">📍 Locate Me</button></div><div id="dashboardMap" class="map"></div></div>
+</section>
+
+<section id="report" class="page">
+  <div class="topbar"><div><p class="eyebrow">REPORT INCIDENT</p><h1>Report an emergency</h1><p class="subtitle">Provide accurate information so others can respond safely.</p></div></div>
+  <div class="report-layout">
+    <div class="form-card">
+      <div class="form-title"><div class="step-number">01</div><div><h2>Incident details</h2><p>What happened?</p></div></div>
+      <label>Disaster / Accident Type</label>
+      <div class="incident-grid">
+        <button class="incident-option" data-type="Flood">🌊<small>Flood</small></button>
+        <button class="incident-option" data-type="Fire">🔥<small>Fire</small></button>
+        <button class="incident-option" data-type="Earthquake">🌎<small>Earthquake</small></button>
+        <button class="incident-option" data-type="Accident">🚗<small>Accident</small></button>
+        <button class="incident-option" data-type="Storm">🌪️<small>Storm</small></button>
+        <button class="incident-option" data-type="Other">⚠️<small>Other</small></button>
+      </div>
+      <input type="hidden" id="incidentType">
+      <div class="form-title location-title"><div class="step-number">02</div><div><h2>Incident location</h2><p>Use your location or select another location.</p></div></div>
+      <div class="location-actions"><button type="button" class="location-btn" onclick="getCurrentLocation()">📍 Use my current location</button><button type="button" class="location-btn secondary" onclick="enableManualLocation()">📌 Select manually</button></div>
+      <div class="location-status" id="locationStatus">Location not selected</div>
+      <div id="reportMap" class="map report-map"></div>
+      <div class="form-title"><div class="step-number">03</div><div><h2>Incident photo</h2><p>Upload a photo if it is safe to do so.</p></div></div>
+      <label class="upload-box"><input type="file" id="incidentPhoto" accept="image/*" onchange="previewImage(event)"><div id="uploadContent"><div class="upload-icon">📷</div><strong>Upload incident photo</strong><span>PNG, JPG or WEBP</span></div><img id="photoPreview" alt="Photo preview"></label>
+      <label for="description">Description</label>
+      <textarea id="description" rows="5" placeholder="Describe what happened, where it happened, and any important information..."></textarea>
+      <button class="submit-btn" onclick="submitIncident()">🚨 Submit Emergency Report</button>
+    </div>
+    <div class="report-info">
+      <div class="safety-card"><div class="safety-icon">🛡️</div><h2>Report safely</h2><p>Only report an incident if you can do so safely. Do not put yourself in danger to take a photograph.</p></div>
+      <div class="map-card small-map-card"><div class="map-header"><div><h3>Selected Location</h3></div></div><div id="miniMap" class="map mini-map"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="nearby" class="page">
+  <div class="topbar"><div><p class="eyebrow">LIVE INCIDENT NETWORK</p><h1>Nearby incidents</h1><p class="subtitle">Reports submitted by users in the incident database.</p></div><button class="outline-btn" onclick="loadIncidents()">↻ Refresh</button></div>
+  <div class="filter-row">
+    <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Flood">🌊 Flood</button><button class="filter" data-filter="Fire">🔥 Fire</button><button class="filter" data-filter="Earthquake">🌎 Earthquake</button><button class="filter" data-filter="Accident">🚗 Accident</button><button class="filter" data-filter="Storm">🌪️ Storm</button>
+  </div>
+  <div class="status-legend"><div class="legend-items">
+    <span class="item"><span class="status-badge s-reported">🟡 Reported</span> Someone submitted this</span>
+    <span class="item"><span class="status-badge s-under_review">🔵 Under review</span> Being checked</span>
+    <span class="item"><span class="status-badge s-verified">🟢 Verified</span> Confirmed by an admin</span>
+    <span class="item"><span class="status-badge s-unverified">⚪ Unverified</span> Could not be confirmed</span>
+    <span class="item"><span class="status-badge s-resolved">✓ Resolved</span> No longer active</span></div>
+    <p>Only Verified reports are confirmed. Treat other reports with caution and call local emergency services if someone is in danger.</p></div>
+  <div class="nearby-layout">
+    <div class="map-card nearby-map-card"><div id="nearbyMap" class="map"></div></div>
+    <div class="incident-panel"><div class="panel-header"><h2>Reported incidents</h2><p id="incidentCount">Loading reports...</p></div><div id="incidentList"><div class="empty-state"><div>◎</div><h3>Loading real reports...</h3><p>Incident markers are loaded from the connected incident database.</p></div></div></div>
+  </div>
+</section>
+
+<section id="profile" class="page">
+  <div class="topbar"><div><p class="eyebrow">MY PROFILE</p><h1>Your profile</h1><p class="subtitle">Saved on this device. Used to fill in your SOS message.</p></div></div>
+  <div class="profile-layout">
+    <div class="form-card">
+      <div class="photo-row">
+        <div class="profile-photo" id="profilePhoto">👤</div>
+        <div class="photo-actions">
+          <label class="outline-btn" style="margin:0;cursor:pointer">Upload photo<input type="file" id="pfPhoto" accept="image/*" onchange="handleProfilePhoto(event)"></label>
+          <button type="button" class="outline-btn" onclick="removeProfilePhoto()">Remove</button>
+        </div>
+      </div>
+      <div class="field"><label for="pfName">Full name</label><input id="pfName" type="text" autocomplete="name" placeholder="Your name"><div class="err">Enter your name.</div></div>
+      <div class="field"><label for="pfPhone">Your contact number</label><input id="pfPhone" type="tel" autocomplete="tel" placeholder="+91 98765 43210"><div class="err">Enter a valid phone number (7 to 15 digits).</div></div>
+      <h3 class="section-label">Emergency contact (receives your SOS)</h3>
+      <div class="field"><label for="pfEmName">Contact name <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="pfEmName" type="text" placeholder="e.g. Mom"></div>
+      <div class="field"><label for="pfEmPhone">Emergency contact number</label><input id="pfEmPhone" type="tel" placeholder="+91 98765 43210"><div class="err">Enter a valid phone number (7 to 15 digits).</div><small>Include the country code. 10-digit numbers are treated as +91 for WhatsApp.</small></div>
+      <button class="submit-btn" type="button" onclick="saveProfile()">Save profile</button>
+      <div class="saved-note" id="savedNote" role="status"></div>
+    </div>
+    <div class="report-info">
+      <div class="sos-info-card"><h3>How SOS works</h3><ol><li>Tap the red SOS button.</li><li>A 5-second countdown lets you cancel a mistake.</li><li>Your live location is found.</li><li>Tap Call, Text or WhatsApp to reach your contact with a map link.</li></ol><div class="contact-summary" id="contactSummary"></div></div>
+      <div class="safety-card"><div class="safety-icon">🛡️</div><h2>In immediate danger?</h2><p>Call your local emergency number first (India: 112). ResQ SOS is a shortcut to your personal contact, not a replacement for emergency services.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="admin" class="page">
+  <div class="topbar"><div><p class="eyebrow">ADMIN</p><h1>Review reports</h1><p class="subtitle">Check each report before it is treated as confirmed.</p></div></div>
+  <div id="adminLogin" class="form-card admin-wrap">
+    <div class="field"><label for="adminUser">Username</label><input id="adminUser" type="text" autocomplete="username"></div>
+    <div class="field"><label for="adminPass">Password</label><input id="adminPass" type="password" autocomplete="current-password"></div>
+    <div class="admin-err" id="adminLoginErr" role="alert"></div>
+    <button class="submit-btn" id="adminLoginBtn" type="button">Sign in</button>
+  </div>
+  <div id="adminPanel" style="display:none">
+    <div class="admin-bar"><span class="muted">Signed in as admin. Changes apply to the public map immediately.</span><button class="outline-btn" id="adminSignOut" type="button">Sign out</button></div>
+    <div class="stat-row" id="adminStats"></div>
+    <div class="admin-list" id="adminList"></div>
+  </div>
+</section>
+</main>
+</div>
+
+
+<button class="sos-fab" type="button" onclick="openSOS()" aria-label="Send SOS to emergency contact">SOS</button>
+<div class="modal" id="sosModal" role="dialog" aria-modal="true" aria-label="SOS">
+  <div class="sos-box">
+    <div id="sosCountdown">
+      <h2>Sending SOS</h2><p>Your emergency contact will be called and sent your location.</p>
+      <div class="sos-count" id="sosCount">5</div>
+      <div class="sos-row"><button class="ghost-btn" onclick="closeSOS()">Cancel</button><button class="submit-btn" onclick="sosSendNow()">Continue now</button></div>
+    </div>
+    <div id="sosActions" style="display:none"></div>
+    <div id="sosNoContact" style="display:none">
+      <h2>Add an emergency contact</h2><p>SOS needs a saved emergency contact number. Add one in your profile first.</p>
+      <div class="sos-row"><button class="ghost-btn" onclick="closeSOS()">Close</button><button class="submit-btn" onclick="sosGoProfile()">Open profile</button></div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="successModal"><div class="modal-box"><div class="success-icon">✓</div><h2>Report submitted</h2><p>Your emergency report has been saved successfully.</p><button class="submit-btn" onclick="closeSuccess()">Done</button></div></div>
+
+<script>
+let dashboardMap,reportMap,nearbyMap,currentMarker=null,currentPosition=null,nearbyMarkers=[],selectedFilter="All";
+
+function showPage(pageName){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active-page"));
+ document.getElementById(pageName)?.classList.add("active-page");
+ document.querySelectorAll(".nav-item").forEach(i=>i.classList.toggle("active",i.dataset.page===pageName));
+ if(pageName==="nearby"){setTimeout(()=>{if(nearbyMap)google.maps.event.trigger(nearbyMap,"resize");loadIncidents()},100)}
+}
+document.querySelectorAll(".nav-item").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+
+function initMaps(){
+ const defaultLocation={lat:20.5937,lng:78.9629};
+ const opts={center:defaultLocation,zoom:5,mapTypeControl:false,streetViewControl:false,fullscreenControl:true};
+ dashboardMap=new google.maps.Map(document.getElementById("dashboardMap"),opts);
+ reportMap=new google.maps.Map(document.getElementById("reportMap"),opts);
+ nearbyMap=new google.maps.Map(document.getElementById("nearbyMap"),opts);
+ new google.maps.Map(document.getElementById("miniMap"),opts);
+ reportMap.addListener("click",e=>setIncidentLocation(e.latLng.lat(),e.latLng.lng()));
+ loadIncidents();
+}
+
+function getCurrentLocation(){
+ if(!navigator.geolocation){alert("Your browser does not support location detection.");return}
+ const status=document.getElementById("locationStatus");
+ if(status)status.innerText="Detecting your location...";
+ navigator.geolocation.getCurrentPosition(pos=>{
+   const lat=pos.coords.latitude,lng=pos.coords.longitude;
+   currentPosition={lat,lng};
+   setIncidentLocation(lat,lng);
+   if(dashboardMap){dashboardMap.setCenter({lat,lng});dashboardMap.setZoom(15)}
+   if(nearbyMap){nearbyMap.setCenter({lat,lng});nearbyMap.setZoom(14)}
+ },err=>{
+   let msg=err.code===1?"Location permission was denied.":"Unable to detect your location.";
+   if(status)status.innerText=msg; alert(msg);
+ },{enableHighAccuracy:true,timeout:10000,maximumAge:0});
+}
+
+function setIncidentLocation(lat,lng){
+ currentPosition={lat,lng};
+ if(currentMarker)currentMarker.setMap(null);
+ currentMarker=new google.maps.Marker({position:{lat,lng},map:reportMap,draggable:true,title:"Incident location"});
+ reportMap.setCenter({lat,lng});reportMap.setZoom(16);
+ currentMarker.addListener("dragend",e=>{currentPosition={lat:e.latLng.lat(),lng:e.latLng.lng()};updateLocationText()});
+ updateLocationText();
+}
+
+function updateLocationText(){
+ const s=document.getElementById("locationStatus");
+ if(s&&currentPosition)s.innerHTML=`<strong>Location selected</strong><br>Latitude: ${currentPosition.lat.toFixed(6)}<br>Longitude: ${currentPosition.lng.toFixed(6)}`;
+}
+function enableManualLocation(){alert("Click anywhere on the report map to select the incident location. You can also drag the marker.");}
+
+document.querySelectorAll(".incident-option").forEach(b=>b.addEventListener("click",function(){
+ document.querySelectorAll(".incident-option").forEach(x=>x.classList.remove("selected"));
+ this.classList.add("selected");document.getElementById("incidentType").value=this.dataset.type;
+}));
+
+function previewImage(event){
+ const file=event.target.files[0],preview=document.getElementById("photoPreview"),content=document.getElementById("uploadContent");
+ if(!file){preview.style.display="none";content.style.display="block";return}
+ const reader=new FileReader();
+ reader.onload=e=>{preview.src=e.target.result;preview.style.display="block";content.style.display="none"};
+ reader.readAsDataURL(file);
+}
+
+function submitIncident(){
+ const type=document.getElementById("incidentType").value;
+ const description=document.getElementById("description").value.trim();
+ if(!type)return alert("Please select the disaster or accident type.");
+ if(!currentPosition)return alert("Please select the incident location.");
+ if(!description)return alert("Please add a description of the incident.");
+ const photo=document.getElementById("incidentPhoto").files[0];
+ const incident={id:crypto.randomUUID(),type,description,latitude:currentPosition.lat,longitude:currentPosition.lng,createdAt:new Date().toISOString(),photoName:photo?photo.name:null};
+ const existing=JSON.parse(localStorage.getItem("resqIncidents")||"[]");
+ existing.push(incident);localStorage.setItem("resqIncidents",JSON.stringify(existing));
+ document.getElementById("successModal").classList.add("show");resetForm();
+}
+function resetForm(){
+ document.querySelectorAll(".incident-option").forEach(x=>x.classList.remove("selected"));
+ document.getElementById("incidentType").value="";document.getElementById("description").value="";document.getElementById("incidentPhoto").value="";
+ document.getElementById("photoPreview").style.display="none";document.getElementById("uploadContent").style.display="block";
+}
+function closeSuccess(){document.getElementById("successModal").classList.remove("show");showPage("nearby");}
+
+function loadIncidents(){
+ const incidents=JSON.parse(localStorage.getItem("resqIncidents")||"[]");
+ displayIncidents(incidents);
+}
+
+function displayIncidents(incidents){
+ const list=document.getElementById("incidentList"),count=document.getElementById("incidentCount");
+ nearbyMarkers.forEach(m=>m.setMap(null));nearbyMarkers=[];
+ let filtered=selectedFilter==="All"?incidents:incidents.filter(i=>i.type===selectedFilter);
+ count.innerText=`${filtered.length} reported incident${filtered.length===1?"":"s"}`;
+ if(!filtered.length){list.innerHTML=`<div class="empty-state"><div>◎</div><h3>No reported incidents</h3><p>There are currently no real reports matching this filter.</p></div>`;return}
+ list.innerHTML="";
+ filtered.forEach(incident=>{
+  const card=document.createElement("div");card.className="incident-card";
+  const date=new Date(incident.createdAt);
+  card.innerHTML=`<div class="incident-top"><div class="incident-type">${getIncidentIcon(incident.type)} ${escapeHTML(incident.type)}</div><div class="incident-time">${date.toLocaleString()}</div></div><div class="incident-description">${escapeHTML(incident.description)}</div>`;
+  card.addEventListener("click",()=>focusIncident(incident));list.appendChild(card);
+  if(nearbyMap){
+   const marker=new google.maps.Marker({position:{lat:incident.latitude,lng:incident.longitude},map:nearbyMap,title:incident.type});
+   const info=new google.maps.InfoWindow({content:`<strong>${escapeHTML(incident.type)}</strong><br><br>${escapeHTML(incident.description)}`});
+   marker.addListener("click",()=>info.open({map:nearbyMap,anchor:marker}));nearbyMarkers.push(marker);
+  }
+ });
+}
+function focusIncident(i){if(nearbyMap){nearbyMap.setCenter({lat:i.latitude,lng:i.longitude});nearbyMap.setZoom(17)}}
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",function(){
+ document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));this.classList.add("active");selectedFilter=this.dataset.filter;loadIncidents();
+}));
+function escapeHTML(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function getIncidentIcon(type){return {Flood:"🌊",Fire:"🔥",Earthquake:"🌎",Accident:"🚗",Storm:"🌪️",Other:"⚠️"}[type]||"⚠️"}
+
+</script>
+<script>
+/* ===== ResQ add-on: Profile + SOS =====
+   Works alongside script.js. Uses showPage() from script.js for navigation.
+   Profile is stored in this browser's localStorage under "resqProfile". */
+(function(){
+const KEY="resqProfile";
+let profile=load(), pendingPhoto=undefined, countdownTimer=null, sosPos=null, sosGeoId=null;
+
+const $=id=>document.getElementById(id);
+const esc=v=>String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(profile));return true}catch(e){return false}}
+const digits=s=>String(s||"").replace(/[^\d]/g,"");
+const validPhone=s=>{const d=digits(s);return d.length>=7&&d.length<=15};
+const telNumber=s=>{s=String(s||"").trim();return (s.startsWith("+")?"+":"")+digits(s)};
+function waNumber(s){let d=digits(s);if(d.length===10)d="91"+d; /* assumes India (+91) for 10-digit numbers */ return d}
+
+/* ---------- Profile UI ---------- */
+function paintAvatar(el){
+  if(profile.photo){el.style.backgroundImage=`url(${profile.photo})`;el.textContent=""}
+  else{el.style.backgroundImage="";el.textContent=(profile.name||"?").trim().charAt(0).toUpperCase()||"?"}
+}
+function refreshProfileUI(){
+  const a=$("sideAvatar"),m=$("mobileAvatar");
+  if(a)paintAvatar(a); if(m)paintAvatar(m);
+  const n=$("sideName"),s=$("sideSub");
+  if(n)n.textContent=profile.name||"Set up profile";
+  if(s)s.textContent=profile.emergencyNumber?"SOS contact set":"Add SOS contact";
+  const sum=$("contactSummary");
+  if(sum)sum.innerHTML=profile.emergencyNumber
+    ?`<strong>SOS goes to:</strong><br>${esc(profile.emergencyName||"Emergency contact")} · ${esc(profile.emergencyNumber)}`
+    :`No emergency contact saved yet. SOS will not work until you add one.`;
+}
+function fillForm(){
+  $("pfName").value=profile.name||"";$("pfPhone").value=profile.phone||"";
+  $("pfEmName").value=profile.emergencyName||"";$("pfEmPhone").value=profile.emergencyNumber||"";
+  const pp=$("profilePhoto");
+  if(profile.photo){pp.style.backgroundImage=`url(${profile.photo})`;pp.textContent=""}
+  else{pp.style.backgroundImage="";pp.textContent="👤"}
+}
+function setInvalid(id,bad){$(id).closest(".field").classList.toggle("invalid",bad)}
+
+window.handleProfilePhoto=function(ev){
+  const f=ev.target.files[0];if(!f)return;
+  const img=new Image(),url=URL.createObjectURL(f);
+  img.onload=()=>{
+    const S=240,c=document.createElement("canvas");c.width=c.height=S;
+    const r=Math.min(img.width,img.height),sx=(img.width-r)/2,sy=(img.height-r)/2;
+    c.getContext("2d").drawImage(img,sx,sy,r,r,0,0,S,S);
+    pendingPhoto=c.toDataURL("image/jpeg",.8);URL.revokeObjectURL(url);
+    const pp=$("profilePhoto");pp.style.backgroundImage=`url(${pendingPhoto})`;pp.textContent="";
+  };
+  img.onerror=()=>{URL.revokeObjectURL(url);alert("That file could not be read as an image.")};
+  img.src=url;
+};
+window.removeProfilePhoto=function(){pendingPhoto=null;const pp=$("profilePhoto");pp.style.backgroundImage="";pp.textContent="👤";$("pfPhoto").value=""};
+
+window.saveProfile=function(){
+  const name=$("pfName").value.trim(),phone=$("pfPhone").value.trim();
+  const emName=$("pfEmName").value.trim(),emPhone=$("pfEmPhone").value.trim();
+  const badName=!name,badPhone=!validPhone(phone),badEm=!validPhone(emPhone);
+  setInvalid("pfName",badName);setInvalid("pfPhone",badPhone);setInvalid("pfEmPhone",badEm);
+  if(badName||badPhone||badEm)return;
+  profile.name=name;profile.phone=phone;profile.emergencyName=emName;profile.emergencyNumber=emPhone;
+  if(pendingPhoto!==undefined){if(pendingPhoto)profile.photo=pendingPhoto;else delete profile.photo;pendingPhoto=undefined}
+  const ok=save(),note=$("savedNote");
+  note.textContent=ok?"Profile saved on this device.":"Could not save. Browser storage may be full or blocked.";
+  note.classList.add("show");setTimeout(()=>note.classList.remove("show"),3000);
+  refreshProfileUI();
+};
+
+/* ---------- SOS ---------- */
+function buildMessage(){
+  const when=new Date().toLocaleString();
+  let loc="My location could not be detected.";
+  if(sosPos){
+    loc=`My live location: https://www.google.com/maps?q=${sosPos.lat.toFixed(6)},${sosPos.lng.toFixed(6)}`+(sosPos.acc?` (accuracy about ${Math.round(sosPos.acc)} m)`:"");
+  }
+  return `🚨 SOS! I need help urgently.\nName: ${profile.name||"Unknown"}\nPhone: ${profile.phone||"N/A"}\n${loc}\nSent via ResQ at ${when}`;
+}
+function startLocation(){
+  sosPos=null;stopLocation();
+  const fallback=typeof currentPosition!=="undefined"&&currentPosition?{lat:currentPosition.lat,lng:currentPosition.lng,acc:null,stale:true}:null;
+  if(!navigator.geolocation){sosPos=fallback;return}
+  // watchPosition keeps improving accuracy while the SOS screen is open
+  sosGeoId=navigator.geolocation.watchPosition(p=>{
+    sosPos={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy};
+    renderActions();
+  },()=>{if(!sosPos)sosPos=fallback;renderActions()},{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+}
+function stopLocation(){if(sosGeoId!==null){navigator.geolocation.clearWatch(sosGeoId);sosGeoId=null}}
+
+function show(id,on){$(id).style.display=on?"block":"none"}
+window.openSOS=function(){
+  const modal=$("sosModal");modal.classList.add("show");
+  if(!profile.emergencyNumber||!validPhone(profile.emergencyNumber)){
+    show("sosCountdown",false);show("sosActions",false);show("sosNoContact",true);return;
+  }
+  show("sosNoContact",false);show("sosActions",false);show("sosCountdown",true);
+  startLocation();
+  let n=5;$("sosCount").textContent=n;
+  clearInterval(countdownTimer);
+  countdownTimer=setInterval(()=>{n--;if(n<=0){clearInterval(countdownTimer);showActions()}else $("sosCount").textContent=n},1000);
+};
+function showActions(){clearInterval(countdownTimer);show("sosCountdown",false);show("sosActions",true);renderActions()}
+window.sosSendNow=showActions;
+window.closeSOS=function(){clearInterval(countdownTimer);stopLocation();$("sosModal").classList.remove("show")};
+window.sosGoProfile=function(){closeSOS();showPage("profile")};
+
+function renderActions(){
+  if(!$("sosModal").classList.contains("show")||$("sosActions").style.display==="none")return;
+  const msg=buildMessage(),enc=encodeURIComponent(msg),tel=telNumber(profile.emergencyNumber);
+  const who=esc(profile.emergencyName||profile.emergencyNumber);
+  let cls="warn",txt="Detecting your location… you can still call now.";
+  if(sosPos&&!sosPos.stale){cls="ok";txt=`Location ready${sosPos.acc?` (±${Math.round(sosPos.acc)} m)`:""}.`}
+  else if(sosPos&&sosPos.stale){txt="Using the last location selected in the app (live GPS unavailable)."}
+  $("sosActions").innerHTML=`
+    <h2>Contact ${who}</h2>
+    <p>Tap each button to call and send your location.</p>
+    <div class="sos-loc ${cls}">${txt}</div>
+    <div class="sos-actions">
+      <a class="sos-btn call" href="tel:${tel}">📞 Call ${who}</a>
+      <a class="sos-btn sms" href="sms:${tel}?&body=${enc}">💬 Text my location (SMS)</a>
+      <a class="sos-btn wa" href="https://wa.me/${waNumber(profile.emergencyNumber)}?text=${enc}" target="_blank" rel="noopener">🟢 Send on WhatsApp</a>
+      ${navigator.share?`<button class="sos-btn share" type="button" onclick="sosShare()">↗ Share via other app</button>`:""}
+    </div>
+    <div class="sos-sent-msg">${esc(msg)}</div>
+    <div class="sos-row"><button class="ghost-btn" onclick="closeSOS()">Close</button></div>`;
+}
+window.sosShare=function(){navigator.share({title:"SOS",text:buildMessage()}).catch(()=>{})};
+
+/* ---------- Init ---------- */
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("sosModal").classList.contains("show"))closeSOS()});
+document.addEventListener("DOMContentLoaded",()=>{fillForm();refreshProfileUI()});
+// Re-fill form each time the profile page is opened (discards unsaved edits)
+document.querySelectorAll('[data-page="profile"]').forEach(b=>b.addEventListener("click",()=>{pendingPhoto=undefined;fillForm()}));
+})();
+
+</script>
+<script type="module">
+/* ===== ResQ add-on: Firebase storage + admin verification =====
+   Loaded AFTER script.js. It wraps submitIncident() and loadIncidents() from script.js.
+   If Firebase fails to initialise, the original localStorage behaviour keeps working. */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getFirestore, collection, doc, writeBatch, getDocs, query, where, onSnapshot, updateDoc, setDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+// Firebase web config. These values are identifiers, not secrets.
+// Real protection comes from firestore.rules, so make sure those are published.
+const firebaseConfig = {
+  apiKey: "AIzaSyCBromnmY7IazdIt2cGemIT3Q24phuDk4s",
+  authDomain: "res-q-34aac.firebaseapp.com",
+  projectId: "res-q-34aac",
+  storageBucket: "res-q-34aac.firebasestorage.app",
+  messagingSenderId: "467091072886",
+  appId: "1:467091072886:web:5e77efd6e51e1cd9d17c57",
+  measurementId: "G-9CF8TD7MP8"
+};
+
+// The admin signs in with username "admin123". Firebase Auth needs an email,
+// so the username is mapped to this address. Create this user in the Firebase console.
+const ADMIN_EMAIL = "admin123@resq.app";
+const ADMIN_USERNAME = "admin123";
+
+
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]));
+
+/* ---------- Status model ---------- */
+const STATUS = {
+  reported:     { icon: "🟡", label: "Reported" },
+  under_review: { icon: "🔵", label: "Under review" },
+  verified:     { icon: "🟢", label: "Verified" },
+  unverified:   { icon: "⚪", label: "Unverified" },
+  resolved:     { icon: "✓",  label: "Resolved" },
+  rejected:     { icon: "🚫", label: "Rejected" }
+};
+const PUBLIC_STATUSES = ["reported", "under_review", "verified", "unverified", "resolved"];
+const badge = s => `<span class="status-badge s-${s}">${STATUS[s]?.icon || ""} ${STATUS[s]?.label || esc(s)}</span>`;
+const toISO = ts => (ts && ts.toDate ? ts.toDate() : new Date()).toISOString();
+
+/* ---------- Init ---------- */
+let db, auth, ready = false;
+try {
+  const app = initializeApp(firebaseConfig);
+  db = getFirestore(app); auth = getAuth(app); ready = true;
+  import("https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js")
+    .then(m => m.isSupported().then(ok => ok && m.getAnalytics(app))).catch(() => {});
+} catch (e) { console.error("Firebase init failed", e); }
+
+const origSubmit = window.submitIncident, origLoad = window.loadIncidents, origDisplay = window.displayIncidents;
+
+/* ---------- Public: submit a report ---------- */
+function compressPhoto(file) {
+  return new Promise(resolve => {
+    if (!file) return resolve(null);
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const max = 800, k = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement("canvas"); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url); resolve(c.toDataURL("image/jpeg", 0.7));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+    img.src = url;
+  });
+}
+
+window.submitIncident = async function () {
+  if (!ready) return origSubmit();
+  const type = $("incidentType").value, description = $("description").value.trim();
+  if (!type) return alert("Please select the disaster or accident type.");
+  if (typeof currentPosition === "undefined" || !currentPosition) return alert("Please select the incident location.");
+  if (description.length < 10) return alert("Please describe the incident in at least 10 characters.");
+  // Basic spam brake (client-side only; the admin review is the real safeguard)
+  const last = Number(localStorage.getItem("resqLastReport") || 0);
+  if (Date.now() - last < 60000) return alert("Please wait a minute before sending another report.");
+
+  const btn = document.querySelector("#report .submit-btn"); const label = btn.textContent;
+  btn.disabled = true; btn.textContent = "Submitting...";
+  try {
+    const photo = await compressPhoto($("incidentPhoto").files[0]);
+    let prof = {}; try { prof = JSON.parse(localStorage.getItem("resqProfile")) || {}; } catch (e) {}
+    const ref = doc(collection(db, "incidents")), batch = writeBatch(db);
+    batch.set(ref, { type, description, latitude: currentPosition.lat, longitude: currentPosition.lng, status: "reported", createdAt: serverTimestamp(), ...(photo ? { photo } : {}) });
+    // Reporter contact is stored separately so only the admin can see it
+    batch.set(doc(db, "incidentsPrivate", ref.id), { reporterName: prof.name || "", reporterPhone: prof.phone || "", createdAt: serverTimestamp() });
+    await batch.commit();
+    localStorage.setItem("resqLastReport", String(Date.now()));
+    const p = document.querySelector("#successModal p");
+    if (p) p.textContent = "Your report was submitted and is marked Reported until an admin reviews it.";
+    $("successModal").classList.add("show"); resetForm();
+  } catch (e) {
+    console.error(e); alert("Could not submit the report. Check your connection and try again.");
+  } finally { btn.disabled = false; btn.textContent = label; }
+};
+
+/* ---------- Public: load reports with status badges ---------- */
+window.loadIncidents = async function () {
+  if (!ready) return origLoad();
+  try {
+    const snap = await getDocs(query(collection(db, "incidents"), where("status", "in", PUBLIC_STATUSES)));
+    const list = snap.docs.map(d => { const x = d.data(); return { id: d.id, type: x.type, description: x.description, latitude: x.latitude, longitude: x.longitude, status: x.status, photo: x.photo || null, createdAt: toISO(x.createdAt) }; })
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    origDisplay(list); decorate(list);
+  } catch (e) {
+    console.error(e); const c = $("incidentCount"); if (c) c.textContent = "Could not load reports. Check your connection.";
+  }
+};
+
+function decorate(list) {
+  const sel = typeof selectedFilter !== "undefined" ? selectedFilter : "All";
+  const shown = sel === "All" ? list : list.filter(i => i.type === sel);
+  document.querySelectorAll("#incidentList .incident-card").forEach((card, i) => {
+    const inc = shown[i]; if (!inc) return;
+    card.querySelector(".incident-top")?.insertAdjacentHTML("afterend", `<div class="status-row">${badge(inc.status)}</div>`);
+    if (inc.photo) card.insertAdjacentHTML("beforeend", `<img class="incident-photo" alt="Incident photo" src="${esc(inc.photo)}">`);
+  });
+}
+
+/* ---------- Admin ---------- */
+let unsubs = [], reports = [], priv = {}, adminFilter = "all", drafts = {};
+
+$("adminLoginBtn")?.addEventListener("click", async () => {
+  const u = $("adminUser").value.trim().toLowerCase(), p = $("adminPass").value, err = $("adminLoginErr");
+  err.textContent = "";
+  if (!ready) return err.textContent = "Admin sign-in is unavailable (Firebase did not load).";
+  if (!u || !p) return err.textContent = "Enter your username and password.";
+  const btn = $("adminLoginBtn"); btn.disabled = true;
+  try { await signInWithEmailAndPassword(auth, `${u}@resq.app`, p); $("adminPass").value = ""; }
+  catch (e) {
+    err.textContent = ["auth/invalid-credential", "auth/wrong-password", "auth/user-not-found", "auth/invalid-email"].includes(e.code)
+      ? "Incorrect username or password." : e.code === "auth/too-many-requests" ? "Too many attempts. Try again later." : "Sign-in failed. Check your connection.";
+  } finally { btn.disabled = false; }
+});
+$("adminPass")?.addEventListener("keydown", e => { if (e.key === "Enter") $("adminLoginBtn").click(); });
+$("adminSignOut")?.addEventListener("click", () => signOut(auth));
+
+if (ready) onAuthStateChanged(auth, user => {
+  const isAdmin = !!user && user.email === ADMIN_EMAIL;
+  $("adminLogin").style.display = isAdmin ? "none" : "block";
+  $("adminPanel").style.display = isAdmin ? "block" : "none";
+  if (user && !isAdmin) signOut(auth);
+  isAdmin ? startAdmin() : stopAdmin();
+});
+
+function startAdmin() {
+  stopAdmin();
+  const fail = e => { console.error(e); $("adminList").innerHTML = `<div class="empty-state"><h3>Could not load reports</h3><p>Check that firestore.rules are published and you are signed in as admin.</p></div>`; };
+  unsubs.push(onSnapshot(collection(db, "incidents"), s => { reports = s.docs.map(d => ({ id: d.id, ...d.data() })); renderAdmin(); }, fail));
+  unsubs.push(onSnapshot(collection(db, "incidentsPrivate"), s => { priv = {}; s.docs.forEach(d => priv[d.id] = d.data()); renderAdmin(); }, () => {}));
+}
+function stopAdmin() { unsubs.forEach(u => u()); unsubs = []; reports = []; priv = {}; }
+
+function renderAdmin() {
+  const counts = { all: reports.length }; Object.keys(STATUS).forEach(k => counts[k] = reports.filter(r => r.status === k).length);
+  $("adminStats").innerHTML = [["all", "All"], ...Object.entries(STATUS).map(([k, v]) => [k, `${v.icon} ${v.label}`])]
+    .map(([k, l]) => `<button class="stat-chip${adminFilter === k ? " active" : ""}" data-f="${k}"><strong>${counts[k]}</strong><span>${l}</span></button>`).join("");
+  const rows = reports.filter(r => adminFilter === "all" || r.status === adminFilter)
+    .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+  if (!rows.length) { $("adminList").innerHTML = `<div class="empty-state"><div>◎</div><h3>No reports here</h3><p>Reports in this status will appear here.</p></div>`; return; }
+  $("adminList").innerHTML = rows.map(r => {
+    const p = priv[r.id] || {}, st = r.status;
+    const acts = [["under_review", "Start review", "blue"], ["verified", "Verify", "green"], ["unverified", "Mark unverified", "grey"], ["resolved", "Resolve", "teal"], ["rejected", "Reject", "red"]]
+      .filter(([k]) => k !== st).map(([k, l, c]) => `<button class="adm-act ${c}" data-act="${k}" data-id="${r.id}">${l}</button>`).join("");
+    const note = drafts[r.id] ?? p.adminNote ?? "";
+    return `<article class="admin-card">
+      <div class="admin-card-top"><strong>${esc(r.type)}</strong>${badge(st)}<span class="muted">${r.createdAt?.toDate ? r.createdAt.toDate().toLocaleString() : "just now"}</span></div>
+      <p class="admin-desc">${esc(r.description)}</p>
+      ${r.photo ? `<img class="incident-photo" alt="Incident photo" src="${esc(r.photo)}">` : `<p class="muted">No photo attached</p>`}
+      <div class="admin-meta">
+        <a href="https://www.google.com/maps?q=${Number(r.latitude)},${Number(r.longitude)}" target="_blank" rel="noopener">📍 View location</a>
+        <span>Reporter: ${p.reporterName || p.reporterPhone ? `${esc(p.reporterName || "No name")} · <a href="tel:${esc(p.reporterPhone)}">${esc(p.reporterPhone || "no phone")}</a>` : "Anonymous (no profile)"}</span>
+      </div>
+      <input class="admin-note" data-note="${r.id}" placeholder="Admin note (source checked, who confirmed…)" value="${esc(note)}">
+      <div class="admin-actions">${acts}</div></article>`;
+  }).join("");
+}
+
+$("adminStats")?.addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (b) { adminFilter = b.dataset.f; renderAdmin(); } });
+$("adminList")?.addEventListener("input", e => { const id = e.target.dataset?.note; if (id) drafts[id] = e.target.value; });
+$("adminList")?.addEventListener("click", async e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const id = b.dataset.id, status = b.dataset.act;
+  if (status === "rejected" && !confirm("Reject this report? It will be hidden from the public.")) return;
+  b.disabled = true;
+  try {
+    await updateDoc(doc(db, "incidents", id), { status, reviewedAt: serverTimestamp() });
+    await setDoc(doc(db, "incidentsPrivate", id), { adminNote: drafts[id] ?? priv[id]?.adminNote ?? "", reviewedBy: ADMIN_EMAIL }, { merge: true });
+    delete drafts[id];
+  } catch (err) { console.error(err); alert("Could not update this report. Check your connection and permissions."); b.disabled = false; }
+});
+
+// The first loadIncidents() from the map callback may have run before this module loaded
+window.loadIncidents();
+
+</script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd9igKcIJ60IxGykTXMQie99C3mPln58I&callback=initMaps"></script>
+</body>
+</html>
